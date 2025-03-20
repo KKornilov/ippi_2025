@@ -1,0 +1,42 @@
+[project]
+name = "Ippi_python_2025"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "KornilovKonstanitn"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy (==1.26.4)",
+    "typing (==3.7.4.3)",
+    "matplotlib (==3.10.0)",
+    "click (>=8.1.8,<9.0.0)",
+    "ruff (>=0.11.0,<0.12.0)",
+    "pytest (>=8.3.5,<9.0.0)",
+    "pytest-cov (>=6.0.0,<7.0.0)",
+    "scipy (>=1.15.2,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [
+    { include = "src" },
+]
+
+[tool.ruff]
+# Enable flake8-bugbear (\B) rules.
+select = ["E", "F", "B", "I"]
+ignore = ["E501", "E741"]  # Ignore line length violations and others
+
+# Allow autofix for all enabled rules (when \--fix\) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+
+[tool.poetry.scripts]
+biliniar_interpolation = "src.interpolation_project.interpolation.biliniar_interpolation:main"
+l2_interpolation = "src.interpolation_project.interpolation.l2_interpolation:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
