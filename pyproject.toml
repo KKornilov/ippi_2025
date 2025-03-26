@@ -15,7 +15,9 @@ dependencies = [
     "ruff (>=0.11.0,<0.12.0)",
     "pytest (>=8.3.5,<9.0.0)",
     "pytest-cov (>=6.0.0,<7.0.0)",
-    "scipy (>=1.15.2,<2.0.0)"
+    "scipy (>=1.15.2,<2.0.0)",
+    "pillow (>=11.1.0,<12.0.0)",
+    "sphinx-rtd-theme (>=3.0.2,<4.0.0)"
 ]
 
 [tool.poetry]
@@ -23,18 +25,44 @@ packages = [
     { include = "src" },
 ]
 
-[tool.ruff]
-# Enable flake8-bugbear (\B) rules.
-select = ["E", "F", "B", "I"]
-ignore = ["E501", "E741"]  # Ignore line length violations and others
+[tool.poetry.group.dev.dependencies]
+nox = "^2025.2.9"
+nox-poetry = "^1.2.0"
+sphinx = "^8.2.3"
+myst-parser = "^4.0.1"
+sphinx-click = "^6.0.0"
+sphinx-rtd-theme = "^3.0.2"
+sphinx-autodoc-typehints = "^3.1.0"
+matplotlib = "3.10.0"
 
-# Allow autofix for all enabled rules (when \--fix\) is provided.
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "B", "I",
+    "UP", "C90", "D",
+    "NPY", "PL", "RUF",
+    "TCH"
+]
+ignore = [
+    "D105", "D107",  # Missing docstrings in __init__ and magic methods
+    "PLR0913", "PLR2004"  # Allow many args and magic values in math code
+]
 fixable = ["ALL"]
 unfixable = []
 
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
 
 [tool.poetry.scripts]
-biliniar_interpolation = "src.interpolation_project.interpolation.biliniar_interpolation:main"
+biliniar_interpolation_val = "src.interpolation_project.interpolation.biliniar_algorithms.biliniar_interpolation:main"
+biliniar_interpolation_img = "src.interpolation_project.interpolation.biliniar_algorithms.biliniar_img:main"
 l2_interpolation = "src.interpolation_project.interpolation.l2_interpolation:main"
 
 [build-system]
